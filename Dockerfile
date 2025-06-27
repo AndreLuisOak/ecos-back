@@ -1,7 +1,7 @@
 FROM amazoncorretto:17
 
-# Instala Maven manualmente (versão 3.9.6) com URL válida
-RUN yum install -y curl tar && \
+# Instala Maven manualmente (versão 3.9.6) com gzip incluído
+RUN yum install -y curl tar gzip && \
     curl -fsSL https://archive.apache.org/dist/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.tar.gz -o maven.tar.gz && \
     tar -xzf maven.tar.gz -C /opt && \
     ln -s /opt/apache-maven-3.9.6 /opt/maven && \
