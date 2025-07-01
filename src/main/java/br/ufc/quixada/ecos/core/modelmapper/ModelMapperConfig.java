@@ -16,26 +16,26 @@ import java.time.format.DateTimeFormatter;
 public class ModelMapperConfig {
 
 	@Bean
-	public ModelMapper modelMapper() {		
+	public ModelMapper modelMapper() {
 		var modelMapper = new ModelMapper();
 
-		modelMapper.createTypeMap(Modelo.class, ModeloModel.class)
-				.addMapping(modelo -> modelo.getUsuario(), ModeloModel::setCriador);
+		modelMapper.typeMap(Modelo.class, ModeloModel.class)
+			.addMappings(mapper -> mapper.map(Modelo::getUsuario, ModeloModel::setCriador));
 
 		modelMapper.addConverter(converterLocalDateToString());
-		
+
 		return modelMapper;
 	}
 
 	private AbstractConverter<LocalDate, String> converterLocalDateToString() {
-		return new AbstractConverter<LocalDate, String>() {
-	        @Override
-	        protected String convert(LocalDate source) {	        	
-	        	return source != null ? 
-	        			LocalDateTime.of(source, LocalTime.MIN).format(DateTimeFormatter.ISO_DATE_TIME) :
-	        				null;	        	
-	        }
-	    };
+		return new AbstractConverter<>() {
+			@Override
+			protected String convert(LocalDate source) {
+				return source != null
+					? LocalDateTime.of(source, LocalTime.MIN).format(DateTimeFormatter.ISO_DATE_TIME)
+					: null;
+			}
+		};
 	}
-	
 }
+
