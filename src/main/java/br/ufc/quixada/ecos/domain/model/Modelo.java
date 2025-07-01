@@ -18,7 +18,6 @@ import java.util.UUID;
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@NoArgsConstructor
 public class Modelo {
 
     @EqualsAndHashCode.Include
@@ -58,6 +57,10 @@ public class Modelo {
     @PrePersist
     private void gerarCodigo() {
         setCodigo(UUID.randomUUID());
+    }
+
+    public Modelo() {
+
     }
 
 }
