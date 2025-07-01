@@ -18,6 +18,7 @@ import java.util.UUID;
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
+@NoArgsConstructor
 public class Modelo {
 
     @EqualsAndHashCode.Include
